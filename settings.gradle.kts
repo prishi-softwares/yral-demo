@@ -30,3 +30,4 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 include(":shared:core")
+include(":shared:libs:videoPlayer")
