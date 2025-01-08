@@ -31,3 +31,4 @@ dependencyResolutionManagement {
 include(":composeApp")
 include(":shared:core")
 include(":shared:libs:videoPlayer")
+include(":shared:features:my-feed")
