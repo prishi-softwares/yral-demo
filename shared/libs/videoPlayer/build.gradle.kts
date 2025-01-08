@@ -28,11 +28,17 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(libs.androidx.media3.exoplayer)
+            implementation(libs.media3.exoplayer.dash)
+            implementation(libs.media3.ui)
+            implementation(libs.androidx.media3.exoplayer.hls)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material)
+            implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)

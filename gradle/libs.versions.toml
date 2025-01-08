@@ -19,8 +19,13 @@ ksp = "2.0.21-1.0.26"
 kermit = "2.0.4"
 kotlinInject = "0.7.2"
 ktor = "3.0.0"
-
 navigation-compose = "2.8.0-alpha10"
+
+composeMultiplatformMediaPlayer = "1.0.22"
+media3Exoplayer = "1.1.0"
+media3ExoplayerDash = "1.1.0"
+media3ExoplayerHls = "1.1.0"
+media3Ui = "1.1.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -40,6 +45,10 @@ kotlinInject-compiler = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp
 kotlinInject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime", version.ref = "kotlinInject"}
 kotlinInject-runtime-kmp = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp", version.ref = "kotlinInject"}
 
+androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3Exoplayer" }
+media3-exoplayer-dash = { module = "androidx.media3:media3-exoplayer-dash", version.ref = "media3ExoplayerDash" }
+androidx-media3-exoplayer-hls = { group = "androidx.media3", name = "media3-exoplayer-hls", version.ref = "media3ExoplayerHls" }
+media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3Ui" }
 
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 touchlab-kermit-simple = { module = "co.touchlab:kermit-simple", version.ref = "kermit" }
