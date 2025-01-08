@@ -108,6 +108,5 @@ private fun createHlsMediaSource(mediaItem: MediaItem): MediaSource {
 
 @androidx.annotation.OptIn(UnstableApi::class)
 private fun createProgressiveMediaSource(mediaItem: MediaItem, context: Context): MediaSource {
-    val dataSourceFactory = DefaultDataSource.Factory(context)
-    return ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem)
+    return ProgressiveMediaSource.Factory(MediaCache.getInstance(context).cacheFactory).createMediaSource(mediaItem)
 }
