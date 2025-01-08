@@ -1,10 +1,11 @@
+import com.android.utils.TraceUtils.simpleId
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialisation)
@@ -23,56 +24,41 @@ kotlin {
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "ComposeApp"
-            isStatic = true
-        }
-    }
+    )
     
     sourceSets {
         
         androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.okhttp)
         }
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
-            implementation(projects.shared.core)
-            implementation(projects.shared.libs.videoPlayer)
-            implementation(projects.shared.features.myFeed)
+            api(libs.kotlinInject.runtime.kmp)
+            api(libs.touchlab.kermit)
 
-            implementation(libs.navigation.compose)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.serialisation)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.kotlinx.serialisation)
             implementation(libs.ktor.logging)
+        }
 
-            api(libs.kotlinInject.runtime.kmp)
+        iosMain.dependencies {
+            implementation(libs.ktor.darwin)
+            api(libs.touchlab.kermit.simple)
         }
     }
 }
 
 android {
-    namespace = "org.example.yarldemo"
+    namespace = "org.example.yarldemo.shared.core"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "org.example.yarldemo"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
     }
     packaging {
         resources {
@@ -88,15 +74,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    buildFeatures {
-        compose = true
-        buildConfig = true
-    }
 }
 
 dependencies {
     debugImplementation(compose.uiTooling)
-    ksp(libs.kotlinInject.compiler)
-    implementation(libs.kotlinInject.runtime)
 }
 
