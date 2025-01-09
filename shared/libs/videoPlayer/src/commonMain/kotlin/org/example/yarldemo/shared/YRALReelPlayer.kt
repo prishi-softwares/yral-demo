@@ -43,7 +43,8 @@ internal fun YRALReelsPlayerView(
 ) {
     // Remember the state of the pager
     val pagerState = rememberPagerState(pageCount = {
-        urls.size // Set the page count based on the number of URLs
+        Int.MAX_VALUE
+        //urls.size // Set the page count based on the number of URLs
     })
 
     // Animate scrolling to the current page when it changes
@@ -78,7 +79,7 @@ internal fun YRALReelsPlayerView(
             // Video player with control
             YRALVideoPlayerWithControl(
                 modifier = modifier,
-                url = urls[page], // URL of the video
+                url = urls[page % urls.size], // URL of the video
                 playerConfig = playerConfig,
                 isPause = if (pagerState.currentPage == page) { isPause } else { true }, // Pause video when not in focus
                 onPauseToggle = { isPause = isPause.not() }, // Toggle pause/resume
